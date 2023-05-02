@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="display-4 text-center mt-4">Filtrer les sorties</h1>
+
+    <div class="container mt-5 mb-5">
+        <div class="border border-dark rounded px-2 py-2 mx-auto" style="width: 80%">
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_start(form) }}
+                    {{ form_row(form.campus) }}
+                    {{ form_row(form.nom) }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.dateDebut) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.dateFin) }}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-check mx-5 mt-5">
+                        {{ form_widget(form.orga) }}
+                        {{ form_label(form.orga) }}
+                    </div>
+
+                    <div class="form-check mx-5">
+                        {{ form_widget(form.inscrit) }}
+                        {{ form_label(form.inscrit) }}
+                    </div>
+
+                    <div class="form-check mx-5">
+                        {{ form_widget(form.nonInscrit) }}
+                        {{ form_label(form.nonInscrit) }}
+                    </div>
+
+                    <div class="form-check mx-5">
+                        {{ form_widget(form.passes) }}
+                        {{ form_label(form.passes) }}
+                    </div>
+                    <div class="me-5 mt-3">
+                        {{ form_widget(form.search) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <h2>Résultats de la recherche :</h2>
+
+    {% if sorties is empty and form.vars.valid %}
+        <p>Aucun résultat trouvé pour la recherche effectuée.</p>
+    {% endif %}
+
+    {% if sorties is not empty %}
+        <div class="table-container mx-auto" style="width: 90%">
+            <table class="table table-hover">
+
+                <thead>
+                <tr>
+                    <th>Nom de la sortie</th>
+                    <th>Date de la sortie</th>
+                    <th>Cloture</th>
+                    <th class="text-center">Inscrits/Places</th>
+                    <th>Etat</th>
+                    <th class="text-center">Inscrit</th>
+                    <th>Organisateur</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for sortie in sorties %}
+
+                    <tr>
+                        <td>{{ sortie.nom }}</td>
+                        <td>{{ sortie.dateHeureDebut|date('d/m/Y H:i') }}</td>
+                        <td>{{ sortie.datelimiteInscription |date('d/m/Y') }}</td>
+                        <td class="text-center">{{ sortie.participants.count }}/{{ sortie.nbInscriptionsMax }}</td>
+                        <td>{{ sortie.etat.libelle }}</td>
+                        <td class="text-center">{% if app.user in sortie.participants %}
+                                <p>x</p>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a id="pseudoLink"
+                               href="{{ path('afficher_profile', {'id': sortie.createur.id}) }}">{{ sortie.createur.pseudo }}</a>
+                        </td>
+                        <td>
+                            <div>
+                                {% if sortie.etat.slug != 1 %}
+                                    <a class="btn btn-primary btn-sm"
+                                       href="{{ path('app_sortie_details', {'id': sortie.id}) }}">Afficher</a>
+                                {% endif %}
+                                {% if sortie.participants.count < sortie.nbInscriptionsMax and app.user not in sortie.participants and sortie.etat.slug == 2 and sortie.datelimiteInscription >= date('now') %}
+                                    <a onclick="return confirm('Veux-tu vraiment t\'inscrire a cette sortie ?')" class="btn btn-primary btn-sm"
+                                       href="{{ path('inscrire_participant', {'idSortie':  sortie.id, 'idParticipant': app.user.id}) }}">S'inscrire</a>
+                                {% endif %}
+                                {% if app.user in sortie.participants and sortie.etat.slug != 4 %}
+                                    <a onclick="return confirm('Veux-tu vraiment te désister de cette sortie ?')" class="btn btn-primary btn-sm"
+                                       href="{{ path('remove_participant', {'idSortie':  sortie.id, 'idParticipant': app.user.id}) }}">Se
+                                        désister</a>
+                                {% endif %}
+                                {% if app.user == sortie.createur and sortie.etat.slug == 1 %}
+                                    <a class="btn btn-primary btn-sm" href="{{ path('modifier', {'id':sortie.id}) }}">Modifier</a>
+                                {% endif %}
+                                {% if app.user == sortie.createur and sortie.etat.slug == 1 %}
+                                    <a onclick="return confirm('Êtes-vous sûr de vouloir publier cette sortie ?')" class="btn btn-primary btn-sm"
+                                       href="{{ path('publier_sortie', {'idSortie': sortie.id}) }}">Publier</a>
+                                {% endif %}
+                                {% if (app.user == sortie.createur or is_granted("ROLE_ADMIN")) and sortie.etat.slug not in [4,5,6] %}
+                                    <a class="btn btn-secondary btn-sm"
+                                       href="{{ path('annuler_sortie', {'idSortie': sortie.id}) }}">Annuler</a>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+    <a id="creerSortie" href="{{ path('create') }}" title="Créer une sortie" class="btn btn-primary mt-4 mx-auto btn-lg"
+       style="width: 12em; height: 3em">Créer une sortie</a>
+{% endblock %}

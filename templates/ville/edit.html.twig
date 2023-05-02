@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la ville{% endblock %}
+
+{% block body %}
+<h1 class="display-4 text-center mt-4">Modifier la ville</h1>
+
+<div class=" container-fluid mt-5 mb-5">
+    <div class="border border-dark col-md-8 rounded px-3 py-3 mx-auto">
+        <div class="row">
+            <div class="col-md-8 mx-auto ">
+
+                    {{ include('ville/_form.html.twig', {'button_label': 'Modifier'}) }}
+                    {{ include('ville/_delete_form.html.twig') }}
+                    <button type="submit" class="btn btn-outline-secondary" style="width: 10em;"
+                    onclick="window.location.href='{{ path('app_ville_index') }}'">Retour à la liste</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

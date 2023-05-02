@@ -1,0 +1,7 @@
+#index:
+#    path: /
+#    controller: App\Controller\SortieController::sorties
+
+home:
+  path: /
+  controller: App\Controller\SecurityControlleur::index

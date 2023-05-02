@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la sortie {{ sortie.nom }}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="titretable">
+    <h1 class="display-4 text-center mt-4 mb-4">{{ sortie.nom }}</h1>
+        </div>
+            <table class="table table-hover" style="margin: 0 auto; text-align: center">
+        <thead>
+            <tr>
+            <th scope="col">Date et heure</th>
+            <th scope="col">Date limite d'inscription</th>
+            <th scope="col">Nombre de places</th>
+            <th scope="col">Durée</th>
+            <th scope="col">Description</th>
+            </tr>
+        </thead>
+            <tbody>
+                <tr>
+                    <td>{{ sortie.dateHeureDebut|date('d/m/Y H:i') }}</td>
+
+                    <td>{{ sortie.datelimiteInscription|date('d/m/Y') }}</td>
+
+                    <td>{{ sortie.nbInscriptionsMax }}</td>
+
+                    <td>{% set duree_en_secondes = sortie.duree %}
+                        {% set heures = duree_en_secondes // 3600 %}
+                        {% set minutes = (duree_en_secondes % 3600) // 60 %}
+                        {% set secondes = duree_en_secondes % 60 %}
+                        {{ heures }} H {{ minutes }}</td>
+
+                    <td>{{ sortie.infosSortie }}</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <div class="container-fluid mt-5 mb-5">
+            <div class="col-md-8 mx-auto ">
+
+        <table class="table table-hover"style="width: 70%; margin: 0 auto; text-align: center">
+            <div class="titretable">
+                <h3 class="text-center mt-4 mb-4">Liste des participants :</h3>
+            </div>
+                <thead>
+            <tr>
+                <th>Pseudo</th>
+                <th>Nom</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for participant in sortie.participants %}
+                <tr>
+                    <td><a id="pseudoLink" href="{{ path('afficher_profile', {'id': participant.id}) }}">{{ participant.pseudo }}</a></td>
+                    <td>{{ participant.prenom}} {{ participant.nom }}  </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+            </div>
+        </div>
+    </div>
+    <div class="btns mx-auto" style="display: flex; justify-content: center; ">
+
+        <button type="submit" class="btn btn-primary" style="width: 8em;" onclick="window.location.href='{{ path('sorties') }}'">Retour</button>
+    </div>
+{% endblock %}

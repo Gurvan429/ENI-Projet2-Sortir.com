@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ participant.pseudo }} | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="display-4 text-center mt-4 " >{{ participant.pseudo }}</h1>
+
+    <div class=" container-fluid mt-5 mb-5">
+        <div class="border border-dark col-md-4 rounded px-3 py-3 mx-auto">
+            <div class="row">
+                 <div class="col-md-8 mx-auto ">
+                     <ul>
+                         <li>Prénom : {{ participant.prenom }}</li>
+                         <li>Nom : {{ participant.nom }}</li>
+                         <li>Téléphone : {{ participant.telephone }}</li>
+                         <li>Email : {{ participant.email }}</li>
+                         <li>Campus : <td>{{ participant.campus.nom }}</td></li>
+                         <a href="{{ path('sorties') }}" class="btn btn-primary" style="margin-top: 25px" >Ok</a>
+                     </ul>
+
+                 </div>
+            </div>
+        </div>
+    </div>
+
+
+    {# <h1>{{ participant.pseudo }}</h1>
+    <div class="afficherProfile">
+    <ul>
+        <li>Prénom : {{ participant.prenom }}</li>
+        <li>Nom : {{ participant.nom }}</li>
+        <li>Téléphone : {{ participant.telephone }}</li>
+        <li>Email : {{ participant.email }}</li>
+        <li>Campus : <td>{{ participant.campus.nom }}</td></li>
+        <!-- Autres informations du profil -->
+    </ul>
+    <div class="text-center">
+    <a href="{{ path('sorties') }}" class="btn btn-primary" style="width: 10%">Ok</a>
+    </div>
+    </div>
+    </div> #}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <h1 class="display-4 text-center mt-4" style="padding: 50px;">Modifier la sortie</h1>
+    </div>
+
+    <div class="container">
+        <div class="border border-dark rounded px-2 py-2 mx-auto" style="margin-top: 2em; width: 80%;">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- Colonne gauche -->
+                    {{ form_start(form) }}
+                    {{ form_row(form.nom) }}
+                    {{ form_row(form.dateHeureDebut) }}
+                    {{ form_row(form.duree) }}
+                    {{ form_row(form.datelimiteInscription) }}
+                    {{ form_row(form.nbInscriptionsMax) }}
+                    {{ form_row(form.infosSortie) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.campus) }}
+                    {{ form_row(form.lieu) }}
+                    <div class="input-group-append d-flex justify-content-end">
+                        <span class="mx-2 align-self-center" style="margin-right: 10px;">Ajouter un lieu :</span>
+                        <a href="{{ path('app_lieu_new') }}" class="btn btn-outline-secondary rounded-circle mx-2" id="add-location-btn" title="Ajouter un lieu">+</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btns mx-auto" style="display: flex; justify-content: space-between; max-width: 80%">
+                {{ form_row(form.modifier) }}
+                {{ form_row(form.annuler) }}
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form)}}
+    {% endblock %}
+
+    {% block title %}
+        Modifier une sortie
+    {% endblock %}

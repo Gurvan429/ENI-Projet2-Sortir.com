@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annulation de la sortie "{{ sortie.nom }}"{% endblock %}
+
+{% block body %}
+    <h1 class="display-5 text-center mt-5" > Annulation de la sortie : "{{ sortie.nom }}"</h1>
+    <div class="container text-center display-6 text-center mt-5">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <div class="col-6 text-center mx-auto">
+            {{ form_row(form.motif) }}
+
+        </div>
+
+        <div class="btns mx-auto" style="display: flex; justify-content: center; ">
+
+                <button type="submit" class="btn btn-danger btn-block" style="width: 10em;margin-right: 30px">Annuler la sortie</button>
+
+
+                <button type="button" class="btn btn-secondary btn-block" style="width: 10em;" onclick="window.location.href='{{ path('sorties') }}'">Retour</button>
+           
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+
+    <script>
+        const annulerBtn = document.querySelector('.btn-danger');
+
+        annulerBtn.addEventListener('click', () => {
+            alert('Votre sortie a été annulée.');
+        });
+    </script>
+{% endblock %}

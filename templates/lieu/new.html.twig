@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un lieu{% endblock %}
+
+{% block body %}
+    <h1 class="display-4 text-center mt-4">Ajouter un lieu</h1>
+
+    <div class=" container-fluid mt-5 mb-5">
+        <div class="border border-dark col-md-8 rounded px-3 py-3 mx-auto" style="width: 80%">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <div class="btns mx-auto" style="display: flex; justify-content: center; ">
+                <button type="submit" class="btn btn-primary" style="width: 10em;margin-right: 2em" >Créer un lieu</button>
+                <a href="{{ path('create') }}" type="submit" class="btn btn-outline-secondary" style="width: 10em;">Annuler</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

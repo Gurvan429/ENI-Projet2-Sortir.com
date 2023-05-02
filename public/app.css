@@ -1,0 +1,234 @@
+* {
+    font-family: 'Georgia', serif;
+}
+
+body {
+    background: linear-gradient(#f6f2f2, #cbdef8);
+    background-attachment: fixed;
+    color: #090000;
+    font-family: 'Georgia', serif;
+}
+
+header {
+    text-align: center;
+}
+
+/*responsive navbar*/
+nav {
+    text-align: right;
+    background: rgba(0, 0, 0, 0);
+    width: 100%;
+    position: sticky;
+    top: 0;
+}
+
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+
+nav li {
+    margin-right: 1rem;
+}
+
+nav li a {
+    text-decoration: none;
+    color: #090000;
+    border-bottom: 0.1em solid #090000;
+}
+
+
+nav li a:hover {
+    color: #5eb5e0;
+    border-bottom: 0.2em solid #5eb5e0;
+}
+
+nav a > img {
+    width: 5em;
+    height: 2em;
+}
+
+@media (max-width: 450px) {
+    nav {
+        text-align: left;
+        position: static;
+        width: 100%;
+    }
+
+    nav ul {
+        display: none;
+    }
+
+    nav li {
+        display: block;
+        margin: 0;
+    }
+
+    nav li a {
+        display: block;
+        padding: 10px;
+    }
+
+    #creerSortie{
+        display: none;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 767px) {
+    nav {
+        text-align: left;
+        position: static;
+        width: 100%;
+    }
+
+    nav ul {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    nav li {
+        display: block;
+        margin: 0;
+    }
+
+    nav li a {
+        display: block;
+        padding: 10px;
+    }
+
+}
+
+
+
+main {
+    flex: 1;
+}
+
+.container {
+    margin: auto;
+    padding: 0px;
+}
+
+body > .container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #cbdef8;
+    padding: 10px;
+}
+
+.titretable {
+    text-align: center;
+}
+
+li {
+    list-style: none;
+    margin: 8px 0;
+}
+
+.table-container {
+    max-height: 500px;
+    overflow: auto;
+}
+
+.table-container thead th {
+    position: sticky;
+    top: 0;
+    background-color: #e8ecf4; /* optionnel: ajouter une couleur de fond pour les entêtes fixées */
+    z-index: 999;
+}
+
+/*CREER SORTIES*/
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    flex-basis: 30%;
+    margin-right: 10px;
+    text-align: right;
+}
+
+.form-group .form-control {
+    flex-basis: 60%;
+    margin-left: 10px;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+button {
+    width: 125px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 5px #090000;
+}
+
+.btn{
+    margin-top: 0.5em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#add-location-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+#groupVille{
+    width: 10em;
+}
+
+/*inter-ligne noir tableau*/
+
+td {
+    border-bottom: 1px solid #8a8787;
+}
+
+th {
+    border-bottom: 1px solid  #8a8787;
+
+}/*lien plus sobre*/
+
+#pseudoLink{
+    text-decoration: none;
+}
+
+#pseudoLink:hover{
+    color: #090000;
+}
+
+
+
+
